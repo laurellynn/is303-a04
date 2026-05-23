@@ -26,38 +26,53 @@ Outputs:
 - Return if password strength is weak, good, or strong
 - Prompt user to adjust to make stronger
 '''
-### Functions
+### Constants
 password = input(f"Create a password: (It must have the following: At least 10 digits, 1 capital letter, 1 unique character) ")
-special_chars = "!@#$%^&*()_-+=[;}{:']?/>.<,|~`1234567890"
+import string
+special_chars = string.punctuation
 try_again = "Try again! "
 
+### Functions
 
 def get_length(password):
     ''' Keep asking until the user enters 10 characters.'''
-    while True: 
-        if len(password) >= 10:
-            return("Your password is long enough. ")
-        else:
-            print("Your password must be at least 10 characters long. ")
-            print(try_again)     
-            exit()      
+    try:
+        while True: 
+            if len(password) >= 10:
+                return("Your password is long enough. ")
+            else:
+                print("Your password must be at least 10 characters long. {try_again} ")   
+                exit()      
+    except TypeError:
+        print("Please enter a valid password. {try_again} ")
+        exit()
 
 def get_capital(password):
-     while True: 
-        if any(char.isupper() for char in password):
-            return("Your password has at least one uppercase letter. ")
-        else:
-            print("You need at least one uppercase letter. ")
+     
+    
+    while True: 
+        try: 
+            if any(char.isupper() for char in password):
+                return("Your password has at least one uppercase letter. ")
+            else:
+                print("You need at least one uppercase letter. ")
+                exit() 
+        except TypeError:
+            print("Please enter a valid password. ")
             print(try_again)
-            exit() 
+            exit()
      
 def get_unique(password):
-     while True: 
-        if any(char in special_chars for char in password):
-            return("Your password has at least one unique character. ")
-        else:
-            print("You need at least one unique character. ")
-            print(try_again) 
+     
+    while True:
+        try: 
+            if any(char in special_chars for char in password):
+                return("Your password has at least one unique character. ")
+            else:
+                print("You need at least one unique character. ")
+                print(try_again) 
+        except ValueError:
+            print("Please enter a valid password. {try_again} ")
             exit()
      
   
@@ -76,7 +91,7 @@ uppercase = get_capital(password)
 digits = get_unique(password)
 strength = calculate_strength(length, uppercase, digits)
 print(f"--- Password Strength Results---")
-print(length)
-print(uppercase)
-print(digits)
-print(strength)
+print(f"Length: {length}")
+print(f"Uppercase: {uppercase}")
+print(f"Unique Characters: {digits}")
+print(f"Overall Strength: {strength}")

@@ -78,12 +78,12 @@ def get_unique(password):
   
 def calculate_strength(length, uppercase, digits):
     ''' If all are followed, score = strong, if two followed, score = good, if one followed, score = weak.'''
-    if length == "Your password is long enough. " and uppercase == "Your password has at least one uppercase letter. " and digits == "Your password has at least one unique character. ":
+    if length == "Your password is long enough. " and uppercase == "Your password has at least one uppercase letter. " and digits == "Your password has at least one unique character. " and len(password) >= 20:
         return("Your password is strong! ")
-    elif (length == "Your password is long enough. " and uppercase == "Your password has at least one uppercase letter. ") or (length == "Your password is long enough. " and digits == "Your password has at least one unique character. ") or (uppercase == "Your password has at least one uppercase letter. " and digits == "Your password has at least one unique character. "):
-        return("Your password is okay! Try again and add either an uppercase letter or a unique character to make it stronger! ")
-    elif length == "Your password is long enough. " or uppercase == "Your password has at least one uppercase letter. " or digits == "Your password has at least one unique character. ": 
-        return("Your password is weak! Try again and add an uppercase letter, a unique character, and make it at least 10 characters long to make it stronger! ")
+    elif (length == "Your password is long enough. " and uppercase == "Your password has at least one uppercase letter. ") or (length == "Your password is long enough. " and digits == "Your password has at least one unique character. ") or (uppercase == "Your password has at least one uppercase letter. " and digits == "Your password has at least one unique character. " and len(password) >= 15):
+        return("Your password is okay! Try again and add more characters to make it stronger! ")
+    elif length == "Your password is long enough. " or uppercase == "Your password has at least one uppercase letter. " or digits == "Your password has at least one unique character. " and len(password) >= 10: 
+        return("Your password is weak! Try again and add an uppercase letter, a unique character, and more characters to make it stronger! ")
 
 ### Main
 length = get_length(password)

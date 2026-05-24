@@ -27,8 +27,8 @@ Outputs:
 - Prompt user to adjust to make stronger
 '''
 ### Constants
-password = input(f"Create a password: (It must have the following: At least 10 digits, 1 capital letter, 1 unique character) ")
 import string
+password = input(f"Create a password: (It must have the following: At least 10 digits, 1 capital letter, 1 unique character) ")
 special_chars = string.punctuation
 try_again = "Try again! "
 
